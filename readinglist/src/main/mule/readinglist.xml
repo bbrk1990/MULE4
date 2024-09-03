@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="0f507e62-8248-4639-9da8-0d9e9508339c" file="list.yaml" />
+	<flow name="readinglistFlow" doc:id="1f92ad56-ab7a-4c9c-941d-3f005bc4fe8f" >
+		<scheduler doc:name="Scheduler" doc:id="b67a46fe-0f72-41e1-a55b-210442c7890c" >
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</scheduler>
+		<logger level="INFO" doc:name="Logger" doc:id="4360f156-c1f2-4d85-9f09-638c2a37d37e" />
+		<ee:transform doc:name="Transform Message" doc:id="41fe5a3e-9ed9-42b4-a3f8-1118356799ae" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+p('name')]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="08e153e9-409f-44b7-a336-ee471da1a691" />
+	</flow>
+</mule>
